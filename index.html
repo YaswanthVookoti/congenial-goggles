@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudSqueeze AI - Cloud Media Compressor</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js for beautiful analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1b4b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4c1d95;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7c3aed;
+        }
+        /* Continuous glow animation */
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.4)); }
+            50% { filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.8)); }
+        }
+        .glowing-logo {
+            animation: pulseGlow 4s infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans transition-colors duration-300">
+
+    
+    <!-- AUTH PORTAL SCREEN -->
+    <div id="authScreen" class="min-h-screen flex flex-col justify-between relative overflow-hidden bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-900/40 via-slate-950 to-slate-950">
+        <!-- Background decorative ambient lights -->
+        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-brand-900/20 blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-blue-900/20 blur-[120px] pointer-events-none"></div>
+
+        <!-- Navigation Bar -->
+        <header class="container mx-auto px-6 py-6 flex justify-between items-center relative z-10">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-brand-600 to-indigo-500 p-2.5 rounded-xl text-white shadow-lg shadow-brand-500/20">
+                    <i class="fa-solid fa-cloud-arrow-down text-xl"></i>
+                </div>
+                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300">CloudSqueeze <span class="text-brand-500 font-extrabold">AI</span></span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-slate-400 hidden sm:inline-block"><i class="fa-solid fa-shield-halved text-emerald-400 mr-2"></i>Google Verified Partner</span>
+                <span class="bg-slate-800/80 border border-slate-700/50 text-xs text-slate-300 px-3 py-1.5 rounded-full font-semibold">v2.4 LTS</span>
+            </div>
+        </header>
+
+        <!-- Main Auth Card -->
+        <main class="container mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-12 py-12 relative z-10 my-auto">
+            <!-- Left Side: App Pitch & Analytics Info -->
+            <div class="w-full lg:w-1/2 space-y-6 text-left">
+                <div class="inline-flex items-center space-x-2 bg-brand-500/10 border border-brand-500/30 text-brand-300 px-4 py-1.5 rounded-full text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-brand-400 animate-ping"></span>
+                    <span>Advanced Lossless Audio & Visual Re-encoding</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white">
+                    Squeeze <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-400 to-indigo-400">75% of Bloat</span> From Your Cloud Drive.
+                </h1>
+                <p class="text-slate-400 text-lg leading-relaxed max-w-lg">
+                    Connect your Gmail to securely scan Google Drive & Photos. Our neural lossless compression shrinks large RAW, HEIC, MP4, and JPEG files directly on cloud, saving storage while keeping every single pixel crisp.
+                </p>
+
+                <!-- Core App Stats Mini grid -->
+                <div class="grid grid-cols-3 gap-4 pt-4 max-w-md">
+                    <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl">
+                        <div class="text-2xl font-bold text-white">4.8x</div>
+                        <div class="text-xs text-slate-400">Avg. Shrink Rate</div>
+                    </div>
+                    <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl">
+                        <div class="text-2xl font-bold text-brand-400">0.0%</div>
+                        <div class="text-xs text-slate-400">Quality Loss</div>
+                    </div>
+                    <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl">
+                        <div class="text-2xl font-bold text-emerald-400">Free</div>
+                        <div class="text-xs text-slate-400">Tier Included</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Google OAuth Card -->
+            <div class="w-full lg:w-[460px]">
+                <div class="bg-slate-900/95 border border-slate-800 rounded-3xl p-8 shadow-2xl relative">
+                    <div class="absolute -top-3 -right-3 bg-indigo-600 text-white text-[10px] uppercase font-black px-3 py-1 rounded-full shadow-lg">
+                        Secure Sandbox
+                    </div>
+                    <div class="text-center mb-8">
+                        <div class="inline-block p-4 rounded-full bg-slate-800/80 mb-4">
+                            <i class="fa-solid fa-lock text-3xl text-indigo-400"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white">Connect Cloud Storage</h2>
+                        <p class="text-sm text-slate-400 mt-2">Sign in using your Google account to authorize secure scanning.</p>
+                    </div>
+
+                    <!-- Gmail selection flow simulator -->
+                    <div class="space-y-4">
+                        <!-- Simulated Google Login Trigger -->
+                        <button id="btnGoogleLogin" class="w-full flex items-center justify-center space-x-3 bg-white hover:bg-slate-100 text-slate-950 font-semibold py-3.5 px-4 rounded-xl transition duration-200 shadow-xl shadow-white/5 active:scale-95">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                            </svg>
+                            <span>Sign in with Google</span>
+                        </button>
+
+                        <div class="relative flex py-2 items-center">
+                            <div class="flex-grow border-t border-slate-800"></div>
+                            <span class="flex-shrink mx-4 text-slate-500 text-xs uppercase font-semibold">OAuth Safe Workspace</span>
+                            <div class="flex-grow border-t border-slate-800"></div>
+                        </div>
+
+                        <!-- Info details of simulated auth -->
+                        <div class="bg-slate-950/60 rounded-xl p-4 border border-slate-800/80 space-y-3">
+                            <div class="flex items-start space-x-3 text-xs text-slate-400">
+                                <i class="fa-solid fa-key text-brand-400 mt-0.5"></i>
+                                <span><strong>Read/Write Permissions Required:</strong> To compress and replace files, Google Drive and Photos access permissions will be requested in read-write format.</span>
+                            </div>
+                            <div class="flex items-start space-x-3 text-xs text-slate-400">
+                                <i class="fa-solid fa-cloud-shield text-emerald-400 mt-0.5"></i>
+                                <span><strong>Privacy Assurance:</strong> Our software is fully peer-reviewed. Files are parsed locally in browser RAM whenever possible; cloud assets undergo on-the-fly streaming transformation without human logging.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer Info -->
+        <footer class="container mx-auto px-6 py-8 text-center text-xs text-slate-500 relative z-10 border-t border-slate-900">
+            <p>© 2026 CloudSqueeze AI Inc. Certified Google Photos and Drive Partner API client. All compression algorithms are licensed & compliant with lossy/lossless data guidelines.</p>
+        </footer>
+    </div>
+
+
+
+    <!-- GOOGLE ACCOUNT CHOOSE MODAL (SIMULATION) -->
+    <div id="googleAuthModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden transition-opacity duration-300">
+        <div class="bg-white text-slate-900 rounded-2xl w-full max-w-md p-6 shadow-2xl transform scale-95 transition-transform duration-300 space-y-6">
+            <!-- Google Header -->
+            <div class="flex flex-col items-center justify-center text-center space-y-2">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                </svg>
+                <h3 class="text-xl font-bold font-sans text-slate-800">Sign in with Google</h3>
+                <p class="text-xs text-slate-500">to continue to <strong>CloudSqueeze AI</strong></p>
+            </div>
+
+            <!-- List of simulated Google Accounts -->
+            <div class="space-y-3">
+                <!-- User Account option 1 -->
+                <button onclick="selectGoogleAccount('alex.mercer@gmail.com', 'Alex Mercer')" class="w-full flex items-center justify-between p-3 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 rounded-xl transition text-left">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-indigo-600 text-white font-bold w-10 h-10 rounded-full flex items-center justify-center">AM</div>
+                        <div>
+                            <div class="font-bold text-sm text-slate-800">Alex Mercer</div>
+                            <div class="text-xs text-slate-500">alex.mercer@gmail.com</div>
+                        </div>
+                    </div>
+                    <span class="text-[10px] bg-emerald-50 text-emerald-600 border border-emerald-200 px-2 py-0.5 rounded-full font-semibold">Google Account Connected</span>
+                </button>
+
+                <!-- User Account option 2 -->
+                <button onclick="selectGoogleAccount('design.studio@gmail.com', 'Studio Core')" class="w-full flex items-center justify-between p-3 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 rounded-xl transition text-left">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-rose-500 text-white font-bold w-10 h-10 rounded-full flex items-center justify-center">SC</div>
+                        <div>
+                            <div class="font-bold text-sm text-slate-800">Studio Core</div>
+                            <div class="text-xs text-slate-500">design.studio@gmail.com</div>
+                        </div>
+                    </div>
+                    <span class="text-xs text-slate-400">Offline</span>
+                </button>
+
+                <!-- New account simulator -->
+                <div class="pt-2 border-t border-slate-100">
+                    <div class="flex items-center space-x-3 p-2 text-slate-600 hover:text-slate-800 cursor-pointer text-sm">
+                        <i class="fa-solid fa-user-plus text-slate-400"></i>
+                        <span class="font-medium">Use another account</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Permissions statement -->
+            <div class="bg-amber-50 rounded-xl p-3 border border-amber-100 text-[11px] text-amber-800 leading-normal flex items-start space-x-2">
+                <i class="fa-solid fa-circle-exclamation text-amber-500 mt-0.5"></i>
+                <span>By continuing, Google shares your profile name, email, and security identifier with CloudSqueeze to allow API storage traversal. Read-write authorization can be revoked anytime.</span>
+            </div>
+
+            <!-- Cancel Button -->
+            <button id="btnCancelAuth" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition">
+                Cancel Authentication
+            </button>
+        </div>
+    </div>
+
+
+
+    <!-- CORE DASHBOARD LAYOUT (HIDDEN BY DEFAULT) -->
+    <div id="mainDashboard" class="min-h-screen bg-slate-950 text-slate-100 flex flex-col md:flex-row hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-slate-900 border-b md:border-b-0 md:border-r border-slate-800/80 flex flex-col justify-between shrink-0">
+            <div>
+                <!-- Sidebar Logo Branding -->
+                <div class="p-6 border-b border-slate-800/60 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <div class="bg-gradient-to-tr from-brand-600 to-indigo-500 p-2 rounded-lg text-white">
+                            <i class="fa-solid fa-cloud-arrow-down text-md"></i>
+                        </div>
+                        <span class="font-bold text-lg text-white">CloudSqueeze <span class="text-brand-400">AI</span></span>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="p-4 space-y-1.5">
+                    <button onclick="switchTab('dashboard')" id="tabBtn-dashboard" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition font-medium text-sm text-left bg-brand-600 text-white shadow-lg shadow-brand-500/10">
+                        <i class="fa-solid fa-chart-pie text-lg w-5"></i>
+                        <span>Dashboard Storage</span>
+                    </button>
+
+                    <button onclick="switchTab('cloudScanner')" id="tabBtn-cloudScanner" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition font-medium text-sm text-left text-slate-400 hover:bg-slate-800 hover:text-white">
+                        <div class="relative w-5">
+                            <i class="fa-solid fa-magnifying-glass-chart text-lg"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+                        </div>
+                        <span>Cloud Deep Scanner</span>
+                    </button>
+
+                    <button onclick="switchTab('sandbox')" id="tabBtn-sandbox" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition font-medium text-sm text-left text-slate-400 hover:bg-slate-800 hover:text-white">
+                        <i class="fa-solid fa-cube text-lg w-5"></i>
+                        <span>Live Sandbox Tool</span>
+                    </button>
+
+                    <button onclick="switchTab('settings')" id="tabBtn-settings" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition font-medium text-sm text-left text-slate-400 hover:bg-slate-800 hover:text-white">
+                        <i class="fa-solid fa-sliders text-lg w-5"></i>
+                        <span>Settings & Profiles</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Sidebar User Profile & Actions -->
+            <div class="p-4 border-t border-slate-800/80 space-y-4">
+                <div class="flex items-center space-x-3 p-2 bg-slate-950/40 rounded-xl border border-slate-800/30">
+                    <div id="userAvatar" class="bg-indigo-600 text-white font-bold w-9 h-9 rounded-full flex items-center justify-center">AM</div>
+                    <div class="truncate">
+                        <div id="profileName" class="text-xs font-bold text-white truncate">Alex Mercer</div>
+                        <div id="profileEmail" class="text-[10px] text-slate-500 truncate">alex.mercer@gmail.com</div>
+                    </div>
+                </div>
+                <button id="btnSignOut" class="w-full flex items-center justify-center space-x-2 py-2 bg-slate-800 hover:bg-rose-950/40 hover:text-rose-400 text-slate-300 font-medium text-xs rounded-xl border border-slate-800 transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Disconnect Gmail</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <main class="flex-1 overflow-y-auto h-screen relative bg-slate-950">
+            <!-- Header bar inside Main Workspace -->
+            <header class="sticky top-0 z-20 bg-slate-950/80 backdrop-blur-md border-b border-slate-900 px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h2 id="currentTabTitle" class="text-lg font-bold text-white">Dashboard Storage Overview</h2>
+                    <p class="text-xs text-slate-400">Current target Google Drive storage analysis & neural configuration.</p>
+                </div>
+                <!-- Connection Status Pills -->
+                <div class="flex items-center space-x-3 flex-wrap gap-2">
+                    <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs px-3 py-1 rounded-full font-medium flex items-center space-x-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>API Sandbox Connected</span>
+                    </div>
+                    <div class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs px-3 py-1 rounded-full font-medium">
+                        Lossless Mode: <span class="font-bold text-white">Enabled</span>
+                    </div>
+                </div>
+            </header>
+
+
+
+            <!-- VIEW 1: DASHBOARD OVERVIEW TAB -->
+            <div id="view-dashboard" class="p-6 space-y-6 tab-view">
+                <!-- Highlight Notice Banner -->
+                <div class="bg-gradient-to-r from-brand-900/40 via-indigo-950/20 to-transparent border border-brand-500/30 rounded-2xl p-6 relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 top-0 opacity-10 pointer-events-none flex items-center justify-center">
+                        <i class="fa-solid fa-cloud-arrow-down text-9xl text-indigo-400"></i>
+                    </div>
+                    <div class="relative z-10 max-w-xl space-y-2">
+                        <span class="text-[10px] uppercase tracking-wider font-extrabold text-brand-400">Critical Space Warning</span>
+                        <h3 class="text-2xl font-black text-white">Your Cloud Storage is 94% full.</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Gmail, Google Drive, and Google Photos are approaching their shared maximum capacity. By running a neural deep scan on your cloud, you can optimize large video formats and high-resolution backups seamlessly.
+                        </p>
+                        <div class="pt-4 flex flex-wrap gap-3">
+                            <button onclick="switchTab('cloudScanner')" class="bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold py-2.5 px-5 rounded-xl shadow-lg shadow-brand-500/15 transition flex items-center space-x-2">
+                                <i class="fa-solid fa-bolt"></i>
+                                <span>Scan & Free 6.8 GB</span>
+                            </button>
+                            <button onclick="switchTab('sandbox')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2.5 px-5 rounded-xl border border-slate-700/50 transition">
+                                Test Sandbox Compressor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Counters Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Stat Card 1 -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 space-y-2">
+                        <div class="flex justify-between items-center text-slate-400">
+                            <span class="text-xs font-semibold">Drive Capacity</span>
+                            <i class="fa-solid fa-cloud text-slate-500"></i>
+                        </div>
+                        <div class="flex items-baseline space-x-1.5">
+                            <span class="text-3xl font-black text-white">14.1</span>
+                            <span class="text-xs text-slate-400">/ 15.0 GB</span>
+                        </div>
+                        <!-- Micro Progress Bar -->
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-rose-500 h-2 rounded-full" style="width: 94%"></div>
+                        </div>
+                        <div class="text-[10px] text-rose-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i>0.9 GB Available space</div>
+                    </div>
+
+                    <!-- Stat Card 2 -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 space-y-2">
+                        <div class="flex justify-between items-center text-slate-400">
+                            <span class="text-xs font-semibold">Optimization Multiplier</span>
+                            <i class="fa-solid fa-chart-line text-brand-400"></i>
+                        </div>
+                        <div class="flex items-baseline space-x-1.5">
+                            <span class="text-3xl font-black text-brand-400">4.1x</span>
+                            <span class="text-xs text-slate-400">Max potential</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-brand-500 h-2 rounded-full" style="width: 72%"></div>
+                        </div>
+                        <div class="text-[10px] text-brand-400">Projected output of 3.4 GB</div>
+                    </div>
+
+                    <!-- Stat Card 3 -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 space-y-2">
+                        <div class="flex justify-between items-center text-slate-400">
+                            <span class="text-xs font-semibold">Secure Cloud Saves</span>
+                            <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+                        </div>
+                        <div class="flex items-baseline space-x-1.5">
+                            <span class="text-3xl font-black text-emerald-400">0%</span>
+                            <span class="text-xs text-slate-400">Quality alteration</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-emerald-500 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <div class="text-[10px] text-slate-400">MD5 Bit-Check active</div>
+                    </div>
+
+                    <!-- Stat Card 4 -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 space-y-2">
+                        <div class="flex justify-between items-center text-slate-400">
+                            <span class="text-xs font-semibold">Compression Ratio</span>
+                            <i class="fa-solid fa-arrow-down-wide-narrow text-amber-400"></i>
+                        </div>
+                        <div class="flex items-baseline space-x-1.5">
+                            <span class="text-3xl font-black text-amber-400">-75.8%</span>
+                            <span class="text-xs text-slate-400">Target reduction</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-amber-500 h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <div class="text-[10px] text-amber-400">For raw RAW and H.264 video</div>
+                    </div>
+                </div>
+
+                <!-- Analysis Panel with Chart and Space distribution breakdown -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Left: Google Drive storage chart -->
+                    <div class="lg:col-span-2 bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-md font-bold text-white">Drive Storage Distribution</h3>
+                                <p class="text-xs text-slate-400">Visual mapping of bloated files categorized by metadata.</p>
+                            </div>
+                            <span class="text-xs bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1 rounded-full font-medium">Auto-updated</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6">
+                            <!-- Visual Ring Chart Area -->
+                            <div class="flex justify-center items-center py-4 relative">
+                                <canvas id="storagePieChart" class="max-w-[150px] max-h-[150px]"></canvas>
+                                <div class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none mt-2">
+                                    <span class="text-xs font-bold text-slate-400 uppercase">Usage</span>
+                                    <span class="text-lg font-black text-rose-400">94%</span>
+                                </div>
+                            </div>
+
+                            <!-- Legend -->
+                            <div class="md:col-span-2 space-y-3">
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-xs font-semibold">
+                                        <span class="text-rose-400"><i class="fa-solid fa-video mr-1.5"></i>Media & Video (.mp4, .mov)</span>
+                                        <span class="text-slate-200">9.2 GB (62%)</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 h-1 rounded-full">
+                                        <div class="bg-rose-400 h-1 rounded-full" style="width: 62%"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-xs font-semibold">
+                                        <span class="text-amber-400"><i class="fa-solid fa-image mr-1.5"></i>Photos & RAWs (.jpeg, .cr2)</span>
+                                        <span class="text-slate-200">3.4 GB (23%)</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 h-1 rounded-full">
+                                        <div class="bg-amber-400 h-1 rounded-full" style="width: 23%"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-xs font-semibold">
+                                        <span class="text-blue-400"><i class="fa-solid fa-file-invoice mr-1.5"></i>Documents & Other files</span>
+                                        <span class="text-slate-200">1.5 GB (10%)</span>
+                                    </div>
+                                    <div class="w-full bg-slate-800 h-1 rounded-full">
+                                        <div class="bg-blue-400 h-1 rounded-full" style="width: 10%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Quick Configuration Profile -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <h3 class="text-md font-bold text-white">Default Compression Profile</h3>
+                            <p class="text-xs text-slate-400">Configure how files are parsed. Optimized default saves maximum space safely.</p>
+                            
+                            <!-- Profile select buttons -->
+                            <div class="space-y-2">
+                                <div class="p-3 bg-brand-900/20 border border-brand-500/30 rounded-xl flex items-center justify-between cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-star text-brand-400"></i>
+                                        <div>
+                                            <div class="text-xs font-bold text-white">Lossless Dynamic</div>
+                                            <div class="text-[10px] text-slate-400">Standard compression (Highly Recommended)</div>
+                                        </div>
+                                    </div>
+                                    <i class="fa-regular fa-circle-dot text-brand-400"></i>
+                                </div>
+
+                                <div class="p-3 bg-slate-950/40 border border-slate-800/80 rounded-xl flex items-center justify-between cursor-pointer hover:border-slate-700">
+                                    <div class="flex items-center space-x-3 text-slate-400">
+                                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                        <div>
+                                            <div class="text-xs font-semibold text-slate-200">Visual Lossless (Extreme)</div>
+                                            <div class="text-[10px]">Re-encode with structural AV1 pipeline</div>
+                                        </div>
+                                    </div>
+                                    <i class="fa-regular fa-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
+                            <span>Compression Level: <strong class="text-brand-400">92% Quality</strong></span>
+                            <span>Target: <strong class="text-emerald-400">All Media</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- VIEW 2: CLOUD DEEP SCANNER TAB -->
+            <div id="view-cloudScanner" class="p-6 space-y-6 tab-view hidden">
+                <!-- Action / Scanner Controller -->
+                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="space-y-1">
+                            <h3 class="text-lg font-bold text-white">Google Photos & Google Drive Scan Portal</h3>
+                            <p class="text-xs text-slate-400">Locates bloated files such as uncompressed HEIC, RAW photos, large 4K iPhone recordings, and saves space without content replacement hazards.</p>
+                        </div>
+                        <div>
+                            <!-- Scanner Trigger Button -->
+                            <button id="btnStartScan" class="w-full md:w-auto bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-brand-500/10 transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-radar animate-pulse"></i>
+                                <span id="scanBtnText">Scan Cloud Directory</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar (Visible during scan) -->
+                    <div id="scanProgressBarContainer" class="mt-6 p-4 bg-slate-950/80 rounded-xl border border-slate-800/80 hidden">
+                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
+                            <span id="scanStatusText">Connecting Google Drive API secure node...</span>
+                            <span id="scanPercentageText">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div id="scanProgressBar" class="bg-gradient-to-r from-brand-500 to-indigo-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detected Files list (populated dynamically or statically updated) -->
+                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl overflow-hidden">
+                    <div class="p-5 border-b border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <h4 class="text-md font-bold text-white">Large Files Target Repository</h4>
+                            <p class="text-xs text-slate-400">A security check analyzes the visual and technical metadata of each asset before replacement confirmation.</p>
+                        </div>
+                        <!-- Bulk Actions -->
+                        <div class="flex items-center space-x-2">
+                            <button id="btnCompressAll" class="bg-brand-600/10 hover:bg-brand-600 text-brand-300 hover:text-white border border-brand-500/30 text-xs font-bold py-2 px-4 rounded-xl transition flex items-center space-x-1.5 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                                <i class="fa-solid fa-compress"></i>
+                                <span>Compress Selected</span>
+                            </button>
+                            <button id="btnRestoreOriginals" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2 px-4 rounded-xl border border-slate-700/50 transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-rotate-left"></i>
+                                <span>Reset Simulation</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Scan Results Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-300 border-collapse">
+                            <thead>
+                                <tr class="bg-slate-950/60 border-b border-slate-800/80 text-xs text-slate-400 font-semibold">
+                                    <th class="p-4 w-12 text-center">
+                                        <input type="checkbox" id="selectAllMedia" class="rounded border-slate-800 text-brand-600 focus:ring-brand-500 focus:ring-opacity-25" disabled>
+                                    </th>
+                                    <th class="p-4">Media Name</th>
+                                    <th class="p-4">Current Size</th>
+                                    <th class="p-4">Expected Size</th>
+                                    <th class="p-4">Compression Gain</th>
+                                    <th class="p-4">Security Integrity</th>
+                                    <th class="p-4 text-center">Operation</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scannedMediaTable">
+                                <!-- Pre-populated items waiting for scan -->
+                                <tr>
+                                    <td colspan="7" class="p-8 text-center text-slate-500">
+                                        <div class="flex flex-col items-center justify-center space-y-2">
+                                            <i class="fa-solid fa-folder-open text-4xl text-slate-600 mb-2"></i>
+                                            <span class="font-bold text-sm">No scanner results loaded</span>
+                                            <span class="text-xs max-w-sm">Trigger the Google Cloud Directory deep scan above to list your virtual high-resolution files.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Interactive Log Stream Console -->
+                <div class="bg-slate-950 border border-slate-900 rounded-2xl p-4 font-mono text-xs text-slate-400 space-y-2">
+                    <div class="flex justify-between items-center text-[10px] uppercase font-bold tracking-wider text-slate-500 border-b border-slate-900 pb-2 mb-2">
+                        <span>Squeeze Core Engine Terminal</span>
+                        <span class="text-emerald-400">Idle</span>
+                    </div>
+                    <div id="consoleLogOutput" class="space-y-1 h-36 overflow-y-auto pr-2 scrollbar-thin">
+                        <div class="text-slate-500">&gt; Engine awaiting secure instruction...</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- VIEW 3: LIVE SANDBOX TOOL (REAL IMAGE COMPRESSOR) -->
+            <div id="view-sandbox" class="p-6 space-y-6 tab-view hidden">
+                <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
+                    <h3 class="text-lg font-bold text-white mb-2">Client-Side High Efficiency Sandbox</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Test our compression logic in real-time right here in your browser! Drop an actual local JPG, PNG, or WebP photo below. We'll run a lossy/lossless canvas re-encoding pipeline to let you check exactly how high-fidelity visual compression works. No files are uploaded to any server; compression runs locally in your web browser.
+                    </p>
+                </div>
+
+                <!-- Drag & Drop Area -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Left: Upload, Slider Controls, and Config -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 space-y-4">
+                            <h4 class="text-sm font-bold text-white border-b border-slate-800/80 pb-3">1. Upload Image File</h4>
+                            
+                            <!-- Dropzone container -->
+                            <div id="dropZone" class="border-2 border-dashed border-slate-700 hover:border-brand-500 bg-slate-950/40 rounded-xl p-6 text-center cursor-pointer transition relative group">
+                                <input type="file" id="localFileInput" class="hidden" accept="image/png, image/jpeg, image/webp">
+                                <div class="space-y-3 pointer-events-none">
+                                    <div class="inline-block p-3 rounded-full bg-slate-900 group-hover:bg-brand-900/40 transition">
+                                        <i class="fa-solid fa-file-arrow-up text-2xl text-slate-400 group-hover:text-brand-400 transition"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-200">Drag & drop photo file</div>
+                                        <div class="text-[10px] text-slate-500 mt-1">JPEG, PNG, WebP format (Max 20MB)</div>
+                                    </div>
+                                    <span class="inline-block bg-slate-800/80 border border-slate-700 text-slate-300 px-3 py-1 rounded text-[10px] font-bold">Browse Files</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quality Controls -->
+                        <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 space-y-4">
+                            <h4 class="text-sm font-bold text-white border-b border-slate-800/80 pb-3">2. Compression Tuning</h4>
+                            
+                            <div class="space-y-4">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="text-slate-400 font-semibold">Quality Level</span>
+                                        <span id="qualityValText" class="text-brand-400 font-extrabold">80%</span>
+                                    </div>
+                                    <input type="range" id="qualityRangeInput" min="10" max="100" value="80" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-500">
+                                    <div class="flex justify-between text-[10px] text-slate-500">
+                                        <span>Max Compression</span>
+                                        <span>Balanced</span>
+                                        <span>Lossless Target</span>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <span class="text-xs text-slate-400 font-semibold block">Output Encoder Format</span>
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <button onclick="setFormat('jpeg')" id="btnFormat-jpeg" class="py-2 px-1.5 bg-brand-600 border border-brand-500 text-white font-bold rounded-xl text-xs text-center transition">JPEG</button>
+                                        <button onclick="setFormat('webp')" id="btnFormat-webp" class="py-2 px-1.5 bg-slate-950 border border-slate-800 text-slate-300 font-bold rounded-xl text-xs text-center hover:bg-slate-800 transition">WEBP</button>
+                                        <button onclick="setFormat('png')" id="btnFormat-png" class="py-2 px-1.5 bg-slate-950 border border-slate-800 text-slate-300 font-bold rounded-xl text-xs text-center hover:bg-slate-800 transition">PNG (Lossless)</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Direct Comparison slider -->
+                    <div class="lg:col-span-8 flex flex-col justify-between space-y-4">
+                        <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 space-y-4 flex-1 flex flex-col justify-between">
+                            <div class="flex justify-between items-center border-b border-slate-800/80 pb-3">
+                                <h4 class="text-sm font-bold text-white">3. Split Image Comparison Slider</h4>
+                                <span class="text-xs text-slate-400">Drag to compare pixel precision</span>
+                            </div>
+
+                            <!-- Live preview slider playground -->
+                            <div class="flex-1 flex items-center justify-center min-h-[300px] relative">
+                                <div id="sliderContainer" class="relative w-full h-[320px] max-w-lg rounded-xl overflow-hidden shadow-2xl bg-slate-950 border border-slate-800/80 hidden">
+                                    <!-- Original Photo Layer -->
+                                    <img id="imgOriginal" class="absolute inset-0 w-full h-full object-contain pointer-events-none select-none" src="" alt="Original Preview">
+                                    
+                                    <!-- Optimized Photo Layer (Contained in sliding div) -->
+                                    <div id="optimizedLayerWrapper" class="absolute inset-y-0 left-0 right-0 overflow-hidden pointer-events-none select-none" style="width: 50%;">
+                                        <img id="imgOptimized" class="absolute inset-0 w-full h-full object-contain max-w-none pointer-events-none" src="" alt="Optimized Preview">
+                                    </div>
+
+                                    <!-- Invisible Drag overlay detector -->
+                                    <div id="sliderControlOverlay" class="absolute inset-0 cursor-ew-resize"></div>
+
+                                    <!-- Visual Divider Line -->
+                                    <div id="sliderBar" class="absolute inset-y-0 w-0.5 bg-brand-400 pointer-events-none" style="left: 50%;">
+                                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-brand-500 text-white flex items-center justify-center shadow-lg border-2 border-slate-900">
+                                            <i class="fa-solid fa-left-right text-xs"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- Left Label (Original) -->
+                                    <div class="absolute top-3 left-3 bg-slate-950/80 text-white text-[10px] uppercase font-bold px-2 py-1 rounded-md border border-slate-800">
+                                        Original
+                                    </div>
+                                    <!-- Right Label (Optimized) -->
+                                    <div class="absolute top-3 right-3 bg-brand-950/80 text-brand-300 text-[10px] uppercase font-bold px-2 py-1 rounded-md border border-brand-800">
+                                        Optimized
+                                    </div>
+                                </div>
+
+                                <!-- Empty state when no image is uploaded -->
+                                <div id="sandboxEmptyState" class="text-center text-slate-500 py-12 max-w-sm space-y-3">
+                                    <div class="inline-block p-4 rounded-full bg-slate-900 text-slate-600">
+                                        <i class="fa-regular fa-image text-4xl"></i>
+                                    </div>
+                                    <h4 class="font-bold text-sm text-slate-300">Sandbox Preview Ready</h4>
+                                    <p class="text-xs">Select or drag an image on the left side, then tweak the encoder slider settings to view the direct difference.</p>
+                                </div>
+                            </div>
+
+                            <!-- Compression Metadata Comparison Bar -->
+                            <div id="sandboxMetaBar" class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800/80 hidden text-center">
+                                <div class="bg-slate-950/50 p-2.5 rounded-xl border border-slate-800/50">
+                                    <div class="text-[10px] uppercase text-slate-500 font-bold">Original Size</div>
+                                    <div id="metaOrigSize" class="text-sm font-bold text-slate-300">0.00 KB</div>
+                                </div>
+                                <div class="bg-brand-950/10 p-2.5 rounded-xl border border-brand-500/10">
+                                    <div class="text-[10px] uppercase text-brand-400 font-bold">Compressed Size</div>
+                                    <div id="metaCompSize" class="text-sm font-bold text-brand-300">0.00 KB</div>
+                                </div>
+                                <div class="bg-emerald-950/20 p-2.5 rounded-xl border border-emerald-500/10">
+                                    <div class="text-[10px] uppercase text-emerald-400 font-bold">Space Saved</div>
+                                    <div id="metaSavingPct" class="text-sm font-black text-emerald-400">0.0%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Local Save Trigger Button -->
+                        <div class="flex items-center space-x-3">
+                            <button id="btnDownloadSandbox" class="flex-1 bg-brand-600 hover:bg-brand-500 disabled:bg-slate-800 text-white disabled:text-slate-500 font-bold py-3 px-6 rounded-xl shadow-lg shadow-brand-500/10 transition flex items-center justify-center space-x-2 disabled:cursor-not-allowed" disabled>
+                                <i class="fa-solid fa-cloud-arrow-down"></i>
+                                <span>Save Compressed Image Locally</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- VIEW 4: SETTINGS & PROFILES TAB -->
+            <div id="view-settings" class="p-6 space-y-6 tab-view hidden">
+                <div class="max-w-2xl mx-auto space-y-6">
+                    <!-- General Settings -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 space-y-6">
+                        <h3 class="text-lg font-bold text-white border-b border-slate-800/80 pb-4">Compression Settings & Advanced Profiles</h3>
+                        
+                        <!-- Configuration items -->
+                        <div class="space-y-4">
+                            <div class="flex items-start justify-between">
+                                <div class="space-y-1 pr-6">
+                                    <span class="text-sm font-semibold text-slate-200 block">Delete original files after replacement</span>
+                                    <span class="text-xs text-slate-400">If enabled, once CloudSqueeze generates and replaces a file, the original heavy version is trashed from Google Drive.</span>
+                                </div>
+                                <div class="relative inline-flex items-center cursor-pointer mt-1">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                                </div>
+                            </div>
+
+                            <hr class="border-slate-800/60">
+
+                            <div class="flex items-start justify-between">
+                                <div class="space-y-1 pr-6">
+                                    <span class="text-sm font-semibold text-slate-200 block">AV1 Smart-Encode (Ultra High Efficiency Video)</span>
+                                    <span class="text-xs text-slate-400">Re-encodes existing H.264 mp4 videos to ultra-light AV1 video format. Preserves visually perfect details up to 4K.</span>
+                                </div>
+                                <div class="relative inline-flex items-center cursor-pointer mt-1">
+                                    <input type="checkbox" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                                </div>
+                            </div>
+
+                            <hr class="border-slate-800/60">
+
+                            <div class="flex items-start justify-between">
+                                <div class="space-y-1 pr-6">
+                                    <span class="text-sm font-semibold text-slate-200 block">Perform SHA-256 Bit-by-Bit Validation</span>
+                                    <span class="text-xs text-slate-400">Performs rigorous data verification to secure pixel layouts and block compression artifacts before file replace happens.</span>
+                                </div>
+                                <div class="relative inline-flex items-center cursor-pointer mt-1">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- API Permissions -->
+                    <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 space-y-4">
+                        <h4 class="text-sm font-bold text-white">OAuth Permissions Status</h4>
+                        
+                        <div class="p-4 bg-slate-950/60 border border-slate-800/80 rounded-xl space-y-3">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-400 font-semibold"><i class="fa-brands fa-google-drive mr-2 text-indigo-400"></i>Google Drive API (Read/Write)</span>
+                                <span class="text-emerald-400 font-bold">Authorized</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-400 font-semibold"><i class="fa-solid fa-images mr-2 text-amber-400"></i>Google Photos API (Read/Write)</span>
+                                <span class="text-emerald-400 font-bold">Authorized</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-400 font-semibold"><i class="fa-solid fa-user-shield mr-2 text-brand-400"></i>User Identity Profile Traversal</span>
+                                <span class="text-emerald-400 font-bold">Authorized</span>
+                            </div>
+                        </div>
+
+                        <button onclick="disconnectAll()" class="w-full py-2.5 bg-rose-950/20 hover:bg-rose-900 border border-rose-800/40 text-rose-300 text-xs font-semibold rounded-xl transition">
+                            Revoke All Credentials & Reset CloudSqueeze AI
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+
+    <!-- JAVASCRIPT STATE ENGINE & CORE FUNCTIONALITIES -->
+    <script>
+        // --- 1. Global Application State ---
+        let appState = {
+            currentTab: 'dashboard',
+            isLoggedIn: false,
+            currentUser: {
+                email: 'alex.mercer@gmail.com',
+                name: 'Alex Mercer'
+            },
+            storageChart: null,
+            scannedMedia: [
+                { id: 1, name: 'DSC_4901_RAW.CR2', format: 'RAW Image', size: 45.2, compSize: 10.4, path: '/Drive/CameraRoll', checked: true, progress: 0, status: 'scanned' },
+                { id: 2, name: 'GoPro_Hero10_Dive4K.mp4', format: 'MP4 Video', size: 4200.0, compSize: 1120.0, path: '/Drive/Videos', checked: true, progress: 0, status: 'scanned' },
+                { id: 3, name: 'Maui_Family_Vacation_HEIC.HEIC', format: 'HEIC Image', size: 12.8, compSize: 3.1, path: '/GooglePhotos/Albums', checked: true, progress: 0, status: 'scanned' },
+                { id: 4, name: 'DJI_Drone_Flyby_4K.mov', format: 'MOV Video', size: 1840.0, compSize: 450.0, path: '/Drive/DroneFootage', checked: true, progress: 0, status: 'scanned' },
+                { id: 5, name: 'Wedding_Ceremony_Uncompressed.tiff', format: 'TIFF Image', size: 85.0, compSize: 22.1, path: '/GooglePhotos/Archive', checked: false, progress: 0, status: 'scanned' }
+            ],
+            // Real Image Compressor sandbox state
+            sandbox: {
+                originalImg: null,
+                compressedBlob: null,
+                outputFormat: 'jpeg',
+                quality: 0.8,
+                imageAspect: 1
+            }
+        };
+
+        // --- 2. Startup Initializations ---
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeTerminal();
+            setupLocalSandboxListeners();
+        });
+
+        // Initialize mock storage distribution chart
+        function initStorageChart() {
+            const ctx = document.getElementById('storagePieChart');
+            if (!ctx) return;
+
+            if (appState.storageChart) {
+                appState.storageChart.destroy();
+            }
+
+            appState.storageChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Media/Video', 'Photos/RAW', 'Documents/Other', 'Free Space'],
+                    datasets: [{
+                        data: [9.2, 3.4, 1.5, 0.9],
+                        backgroundColor: [
+                            'rgba(244, 63, 94, 0.8)', // Video
+                            'rgba(245, 158, 11, 0.8)', // Photos
+                            'rgba(59, 130, 246, 0.8)', // Docs
+                            'rgba(30, 41, 59, 0.4)'    // Free
+                        ],
+                        borderColor: '#0f172a',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true }
+                    },
+                    cutout: '72%'
+                }
+            });
+        }
+
+
+
+        // --- 3. Authentication Flows ---
+        const btnGoogleLogin = document.getElementById('btnGoogleLogin');
+        const googleAuthModal = document.getElementById('googleAuthModal');
+        const btnCancelAuth = document.getElementById('btnCancelAuth');
+
+        if (btnGoogleLogin) {
+            btnGoogleLogin.addEventListener('click', () => {
+                googleAuthModal.classList.remove('hidden');
+                setTimeout(() => googleAuthModal.classList.remove('scale-95'), 10);
+            });
+        }
+
+        if (btnCancelAuth) {
+            btnCancelAuth.addEventListener('click', () => {
+                googleAuthModal.classList.add('scale-95');
+                setTimeout(() => googleAuthModal.classList.add('hidden'), 150);
+            });
+        }
+
+        function selectGoogleAccount(email, name) {
+            // Update state
+            appState.currentUser.email = email;
+            appState.currentUser.name = name;
+            appState.isLoggedIn = true;
+
+            // Log simulator trace
+            logTerminal(`Authorized OAuth access token for account: ${email}`);
+            logTerminal(`Connecting securely through CloudSqueeze partner node... OK`);
+
+            // Apply updates to UI Elements
+            document.getElementById('profileName').textContent = name;
+            document.getElementById('profileEmail').textContent = email;
+            
+            // Render first initial in avatar icon
+            const initial = name.split(' ').map(n => n[0]).join('');
+            document.getElementById('userAvatar').textContent = initial;
+
+            // Transition Screen
+            googleAuthModal.classList.add('scale-95');
+            setTimeout(() => {
+                googleAuthModal.classList.add('hidden');
+                document.getElementById('authScreen').classList.add('hidden');
+                document.getElementById('mainDashboard').classList.remove('hidden');
+                // Force layout recalculations and chart mounting
+                initStorageChart();
+                switchTab('dashboard');
+            }, 300);
+        }
+
+        // Disconnect Authentication
+        document.getElementById('btnSignOut').addEventListener('click', disconnectAll);
+
+        function disconnectAll() {
+            appState.isLoggedIn = false;
+            document.getElementById('mainDashboard').classList.add('hidden');
+            document.getElementById('authScreen').classList.remove('hidden');
+            logTerminal('Google Account session revoked successfully.');
+            // Clear current list of media scanned
+            appState.scannedMedia.forEach(item => {
+                item.status = 'scanned';
+                item.progress = 0;
+            });
+            renderScannedMedia();
+        }
+
+
+
+        // --- 4. Tab Switching Logic ---
+        function switchTab(tabId) {
+            appState.currentTab = tabId;
+
+            // Deactivate all tab contents
+            const tabs = ['dashboard', 'cloudScanner', 'sandbox', 'settings'];
+            tabs.forEach(t => {
+                const el = document.getElementById(`view-${t}`);
+                const btn = document.getElementById(`tabBtn-${t}`);
+                if (el) el.classList.add('hidden');
+                if (btn) {
+                    btn.classList.remove('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/10');
+                    btn.classList.add('text-slate-400', 'hover:bg-slate-800', 'hover:text-white');
+                }
+            });
+
+            // Activate target tab
+            const targetEl = document.getElementById(`view-${tabId}`);
+            const targetBtn = document.getElementById(`tabBtn-${tabId}`);
+            if (targetEl) targetEl.classList.remove('hidden');
+            if (targetBtn) {
+                targetBtn.classList.remove('text-slate-400', 'hover:bg-slate-800', 'hover:text-white');
+                targetBtn.classList.add('bg-brand-600', 'text-white', 'shadow-lg', 'shadow-brand-500/10');
+            }
+
+            // Update Page Header Title dynamically
+            const headerTitle = document.getElementById('currentTabTitle');
+            if (headerTitle) {
+                if (tabId === 'dashboard') headerTitle.textContent = "Dashboard Storage Overview";
+                if (tabId === 'cloudScanner') headerTitle.textContent = "Cloud Deep Scanner";
+                if (tabId === 'sandbox') headerTitle.textContent = "High Efficiency Image Sandbox";
+                if (tabId === 'settings') headerTitle.textContent = "Advanced Optimization Settings";
+            }
+
+            // Ensure Storage Chart renders correctly when switching back
+            if (tabId === 'dashboard') {
+                setTimeout(initStorageChart, 50);
+            }
+        }
+
+
+
+        // --- 5. Simulated Cloud Deep Scanner & Compression Engine ---
+        const btnStartScan = document.getElementById('btnStartScan');
+        const scanProgressBarContainer = document.getElementById('scanProgressBarContainer');
+        const scanProgressBar = document.getElementById('scanProgressBar');
+        const scanStatusText = document.getElementById('scanStatusText');
+        const scanPercentageText = document.getElementById('scanPercentageText');
+        const scanBtnText = document.getElementById('scanBtnText');
+
+        if (btnStartScan) {
+            btnStartScan.addEventListener('click', triggerCloudScan);
+        }
+
+        function triggerCloudScan() {
+            scanProgressBarContainer.classList.remove('hidden');
+            btnStartScan.disabled = true;
+            btnStartScan.classList.add('opacity-50', 'cursor-not-allowed');
+            scanBtnText.textContent = "Scanning Cloud Storage...";
+
+            const steps = [
+                { progress: 10, msg: "Initializing Google Secure APIs..." },
+                { progress: 25, msg: "Reading Google Drive file manifests..." },
+                { progress: 45, msg: "Parsing Google Photos database indexes..." },
+                { progress: 68, msg: "Analyzing video container structures..." },
+                { progress: 85, msg: "Checking for unoptimized camera RAW files..." },
+                { progress: 100, msg: "Completed Scanning. Loading results." }
+            ];
+
+            let index = 0;
+            const interval = setInterval(() => {
+                if (index < steps.length) {
+                    const step = steps[index];
+                    scanProgressBar.style.width = `${step.progress}%`;
+                    scanPercentageText.textContent = `${step.progress}%`;
+                    scanStatusText.textContent = step.msg;
+                    logTerminal(step.msg);
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    scanProgressBarContainer.classList.add('hidden');
+                    btnStartScan.disabled = false;
+                    btnStartScan.classList.remove('opacity-50', 'cursor-not-allowed');
+                    scanBtnText.textContent = "Run Deep Cloud Scan Again";
+                    
+                    // Populate results
+                    renderScannedMedia();
+                    // Enable action buttons
+                    document.getElementById('btnCompressAll').disabled = false;
+                    document.getElementById('selectAllMedia').disabled = false;
+                }
+            }, 800);
+        }
+
+        // Render Scanned Files to Table UI
+        function renderScannedMedia() {
+            const tableBody = document.getElementById('scannedMediaTable');
+            tableBody.innerHTML = '';
+
+            appState.scannedMedia.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-900 hover:bg-slate-900/30 transition text-xs";
+                
+                // Set action UI based on current state of processing
+                let actionMarkup = '';
+                if (item.status === 'scanned') {
+                    actionMarkup = `<button onclick="compressSingleCloud(${item.id})" class="bg-brand-600 hover:bg-brand-500 text-white font-bold py-1 px-3 rounded-lg text-[10px] transition">Compress</button>`;
+                } else if (item.status === 'processing') {
+                    actionMarkup = `
+                        <div class="flex flex-col items-center space-y-1">
+                            <div class="w-16 bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-brand-500 h-1.5 rounded-full" style="width: ${item.progress}%"></div>
+                            </div>
+                            <span class="text-[9px] text-slate-400 font-semibold">${item.progress}%</span>
+                        </div>
+                    `;
+                } else if (item.status === 'completed') {
+                    actionMarkup = `<span class="text-emerald-400 font-bold flex items-center justify-center space-x-1"><i class="fa-solid fa-circle-check"></i> <span>Replaced</span></span>`;
+                }
+
+                const reduction = Math.round(((item.size - item.compSize) / item.size) * 100);
+
+                tr.innerHTML = `
+                    <td class="p-4 text-center">
+                        <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleCheck(${item.id})" class="rounded border-slate-800 text-brand-600 focus:ring-brand-500 focus:ring-opacity-25" ${item.status === 'completed' ? 'disabled' : ''}>
+                    </td>
+                    <td class="p-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2 bg-slate-800 rounded-lg text-slate-300">
+                                ${getFileIcon(item.format)}
+                            </div>
+                            <div>
+                                <div class="font-bold text-slate-200">${item.name}</div>
+                                <div class="text-[10px] text-slate-500">${item.path}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4 font-semibold text-slate-400">${formatMB(item.size)}</td>
+                    <td class="p-4 font-bold text-brand-400">${formatMB(item.compSize)}</td>
+                    <td class="p-4 font-extrabold text-emerald-400">-${reduction}%</td>
+                    <td class="p-4">
+                        <span class="inline-flex items-center space-x-1 bg-slate-850 border border-slate-800 text-slate-400 text-[10px] px-2 py-0.5 rounded-full font-medium">
+                            <i class="fa-solid fa-key text-[8px] text-brand-400"></i>
+                            <span>Lossless Check OK</span>
+                        </span>
+                    </td>
+                    <td class="p-4 text-center">
+                        ${actionMarkup}
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Helper icon matcher for media
+        function getFileIcon(format) {
+            if (format.includes('Video')) {
+                return '<i class="fa-solid fa-film text-indigo-400"></i>';
+            }
+            return '<i class="fa-solid fa-file-image text-amber-400"></i>';
+        }
+
+        // Helper formatter for megabytes
+        function formatMB(val) {
+            if (val >= 1024) {
+                return `${(val / 1024).toFixed(2)} GB`;
+            }
+            return `${val.toFixed(1)} MB`;
+        }
+
+        function toggleCheck(id) {
+            const item = appState.scannedMedia.find(m => m.id === id);
+            if (item) item.checked = !item.checked;
+        }
+
+        // Single Cloud Item Compression Simulation
+        function compressSingleCloud(id) {
+            const item = appState.scannedMedia.find(m => m.id === id);
+            if (!item) return;
+
+            item.status = 'processing';
+            item.progress = 0;
+            renderScannedMedia();
+
+            logTerminal(`Initiating optimized compression on: ${item.name}`);
+
+            const interval = setInterval(() => {
+                if (item.progress < 100) {
+                    item.progress += 20;
+                    renderScannedMedia();
+                } else {
+                    clearInterval(interval);
+                    item.status = 'completed';
+                    renderScannedMedia();
+                    logTerminal(`Squeezed & replaced ${item.name} successfully on cloud drive! Saved ${formatMB(item.size - item.compSize)}.`);
+                    updateDashboardCapacity(item.size - item.compSize);
+                }
+            }, 400);
+        }
+
+        // Multi Cloud Item Compression Simulation
+        const btnCompressAll = document.getElementById('btnCompressAll');
+        if (btnCompressAll) {
+            btnCompressAll.addEventListener('click', () => {
+                const checkedItems = appState.scannedMedia.filter(m => m.checked && m.status === 'scanned');
+                if (checkedItems.length === 0) return;
+
+                logTerminal(`Processing batch compression profiles for (${checkedItems.length}) checked items...`);
+                checkedItems.forEach(item => {
+                    compressSingleCloud(item.id);
+                });
+            });
+        }
+
+        // Restore list simulator
+        document.getElementById('btnRestoreOriginals').addEventListener('click', () => {
+            appState.scannedMedia.forEach(item => {
+                item.status = 'scanned';
+                item.progress = 0;
+            });
+            renderScannedMedia();
+            logTerminal('Cloud scan repository targets reset back to unoptimized standard.');
+        });
+
+        // Update visual Dashboard details dynamically
+        function updateDashboardCapacity(savedMB) {
+            logTerminal(`Updating Cloud Storage quotas inside system...`);
+            // Dynamic storage simulation calculation in chart.
+            // Adjust the Pie chart if initialized.
+        }
+
+
+
+        // --- 6. Local Sandbox (REAL IMAGE COMPRESSION ENGINE) ---
+        const dropZone = document.getElementById('dropZone');
+        const localFileInput = document.getElementById('localFileInput');
+        const qualityRangeInput = document.getElementById('qualityRangeInput');
+        const qualityValText = document.getElementById('qualityValText');
+        
+        // Split comparison elements
+        const sliderContainer = document.getElementById('sliderContainer');
+        const sliderControlOverlay = document.getElementById('sliderControlOverlay');
+        const optimizedLayerWrapper = document.getElementById('optimizedLayerWrapper');
+        const sliderBar = document.getElementById('sliderBar');
+        const sandboxEmptyState = document.getElementById('sandboxEmptyState');
+        const sandboxMetaBar = document.getElementById('sandboxMetaBar');
+        
+        const imgOriginal = document.getElementById('imgOriginal');
+        const imgOptimized = document.getElementById('imgOptimized');
+        
+        const metaOrigSize = document.getElementById('metaOrigSize');
+        const metaCompSize = document.getElementById('metaCompSize');
+        const metaSavingPct = document.getElementById('metaSavingPct');
+        const btnDownloadSandbox = document.getElementById('btnDownloadSandbox');
+
+        function setupLocalSandboxListeners() {
+            // Drag and drop event styling handles
+            if (!dropZone) return;
+
+            dropZone.addEventListener('click', () => localFileInput.click());
+
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('border-brand-500', 'bg-brand-900/20');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('border-brand-500', 'bg-brand-900/20');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('border-brand-500', 'bg-brand-900/20');
+                if (e.dataTransfer.files.length > 0) {
+                    handleLocalFile(e.dataTransfer.files[0]);
+                }
+            });
+
+            localFileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleLocalFile(e.target.files[0]);
+                }
+            });
+
+            // Handle slider range change
+            qualityRangeInput.addEventListener('input', (e) => {
+                const rawQuality = parseInt(e.target.value);
+                appState.sandbox.quality = rawQuality / 100;
+                qualityValText.textContent = `${rawQuality}%`;
+                
+                // Re-process image with updated quality settings
+                if (appState.sandbox.originalImg) {
+                    compressLocalImage();
+                }
+            });
+
+            // Set dragging split slider compare mousemove handlers
+            sliderControlOverlay.addEventListener('mousemove', handleSliderDrag);
+            sliderControlOverlay.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    handleSliderDrag(e.touches[0]);
+                }
+            });
+
+            btnDownloadSandbox.addEventListener('click', () => {
+                if (!appState.sandbox.compressedBlob) return;
+                
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(appState.sandbox.compressedBlob);
+                link.download = `cloudSqueeze_optimized.${appState.sandbox.outputFormat}`;
+                link.click();
+            });
+        }
+
+        // Set Compression output format options
+        function setFormat(format) {
+            appState.sandbox.outputFormat = format;
+            
+            // Highlight chosen buttons correctly
+            const formats = ['jpeg', 'webp', 'png'];
+            formats.forEach(f => {
+                const btn = document.getElementById(`btnFormat-${f}`);
+                if (btn) {
+                    if (f === format) {
+                        btn.className = "py-2 px-1.5 bg-brand-600 border border-brand-500 text-white font-bold rounded-xl text-xs text-center transition";
+                    } else {
+                        btn.className = "py-2 px-1.5 bg-slate-950 border border-slate-800 text-slate-300 font-bold rounded-xl text-xs text-center hover:bg-slate-800 transition";
+                    }
+                }
+            });
+
+            if (appState.sandbox.originalImg) {
+                compressLocalImage();
+            }
+        }
+
+        // Slider side-by-side splitter layout calculations
+        function handleSliderDrag(e) {
+            const rect = sliderContainer.getBoundingClientRect();
+            // Calculate absolute horizontal percentage coordinates relative to target element bounding boundaries
+            const x = (e.clientX - rect.left) / rect.width;
+            const percentage = Math.max(0, Math.min(1, x)) * 100;
+
+            // Shift layer widths
+            optimizedLayerWrapper.style.width = `${percentage}%`;
+            sliderBar.style.left = `${percentage}%`;
+        }
+
+        // Read uploaded image and load into DOM Image targets
+        function handleLocalFile(file) {
+            if (!file.type.match('image.*')) {
+                logTerminal("Error: Only valid image targets are acceptable in sandbox workflow.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    appState.sandbox.originalImg = img;
+                    appState.sandbox.originalSize = file.size;
+                    appState.sandbox.imageAspect = img.width / img.height;
+                    
+                    // Assign original image visual sources
+                    imgOriginal.src = e.target.result;
+                    imgOptimized.src = e.target.result;
+
+                    // Display preview block
+                    sandboxEmptyState.classList.add('hidden');
+                    sliderContainer.classList.remove('hidden');
+                    sandboxMetaBar.classList.remove('hidden');
+
+                    // Run the actual compression render pipeline
+                    compressLocalImage();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Actual client-side Image Canvas Compress Processor
+        function compressLocalImage() {
+            const img = appState.sandbox.originalImg;
+            if (!img) return;
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Preserve dimensions
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+
+            // Render raw dimensions to frame buffer
+            ctx.drawImage(img, 0, 0);
+
+            // Fetch target format parameter strings
+            let formatMime = 'image/jpeg';
+            if (appState.sandbox.outputFormat === 'webp') formatMime = 'image/webp';
+            if (appState.sandbox.outputFormat === 'png') formatMime = 'image/png';
+
+            // Extract compressed Blob structure directly from virtual viewport memory
+            canvas.toBlob((blob) => {
+                if (!blob) return;
+
+                appState.sandbox.compressedBlob = blob;
+
+                // Update right image layer comparison source
+                const compressedUrl = URL.createObjectURL(blob);
+                imgOptimized.src = compressedUrl;
+
+                // Render savings output info labels
+                metaOrigSize.textContent = formatBytes(appState.sandbox.originalSize);
+                metaCompSize.textContent = formatBytes(blob.size);
+
+                const savings = appState.sandbox.originalSize - blob.size;
+                const savingsPct = Math.max(0, (savings / appState.sandbox.originalSize) * 100);
+                metaSavingPct.textContent = `${savingsPct.toFixed(1)}%`;
+
+                // Handle conditional element coloring for compressed benefits
+                if (savingsPct <= 0) {
+                    metaSavingPct.textContent = "0.0%";
+                    metaSavingPct.className = "text-sm font-black text-slate-400";
+                } else {
+                    metaSavingPct.className = "text-sm font-black text-emerald-400 animate-pulse";
+                }
+
+                // Enable active download buttons
+                btnDownloadSandbox.disabled = false;
+                btnDownloadSandbox.classList.remove('bg-slate-800', 'text-slate-500');
+                btnDownloadSandbox.classList.add('bg-brand-600', 'hover:bg-brand-500');
+
+                logTerminal(`Client-side re-encoding optimized visual metadata. Ratio: -${savingsPct.toFixed(1)}%`);
+            }, formatMime, appState.sandbox.quality);
+        }
+
+        // Size formatter helper
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const dm = 2;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+
+
+
+        // --- 7. Interactive UI Terminal Logs Controller ---
+        const consoleLogOutput = document.getElementById('consoleLogOutput');
+
+        function initializeTerminal() {
+            logTerminal("CloudSqueeze Engine API Initialized.");
+            logTerminal("System idle. Awaiting Gmail authorization connection...");
+        }
+
+        function logTerminal(text) {
+            if (!consoleLogOutput) return;
+
+            const timeStr = new Date().toLocaleTimeString();
+            const logItem = document.createElement('div');
+            
+            // Conditional highlight colors
+            if (text.includes('Error')) {
+                logItem.innerHTML = `<span class="text-rose-500 font-bold">[${timeStr}]</span> <span class="text-rose-400">${text}</span>`;
+            } else if (text.includes('successfully') || text.includes('Replaced') || text.includes('Completed')) {
+                logItem.innerHTML = `<span class="text-emerald-500 font-bold">[${timeStr}]</span> <span class="text-emerald-300">${text}</span>`;
+            } else if (text.includes('Scanning') || text.includes('Analyzing')) {
+                logItem.innerHTML = `<span class="text-amber-500 font-bold">[${timeStr}]</span> <span class="text-amber-300">${text}</span>`;
+            } else {
+                logItem.innerHTML = `<span class="text-indigo-400 font-bold">[${timeStr}]</span> <span class="text-slate-300">${text}</span>`;
+            }
+
+            consoleLogOutput.appendChild(logItem);
+            consoleLogOutput.scrollTop = consoleLogOutput.scrollHeight;
+        }
+    </script>
+</body>
+</html>
